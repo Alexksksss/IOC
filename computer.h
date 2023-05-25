@@ -9,18 +9,13 @@ class Computer
     IProcessor* Processor;
 public:
     Computer(IProcessor* processor)
-        {
-            Processor = processor;
-        }
-        void SetProcessor(IProcessor* processor)
-        {
-            Processor = processor;
-        }
-        void PrintingInfo()
-        {
-            Processor->GetterProcessor();
-        }
-
+    {
+        Processor = processor;
+    }
+    string GetProcessor()
+    {
+       return Processor->GetterProcessor();
+    }
 };
 
 #endif // COMPUTER_H

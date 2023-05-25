@@ -10,30 +10,22 @@ int IOCContainer::s_nextTypeId = 1;
 
 int main()
 {
-    //------Example #1----------------
-    //Injector injector;
     IOCContainer injector;
 
-    // Регистрируем IHello с классом Hello, т.о. каждый раз запрашивая IHell получаем объект Hello.
-    injector.RegisterInstance<IProcessor, AMD>();
-    auto helloInstance = injector.GetObject<IHello>();
-    helloInstance->hello();
-    injector.RegisterInstance<IHello, Privet>();
-
-    //Здесь, после регистрации получим объект Privet
-    helloInstance = injector.GetObject<IHello>();
-    helloInstance->hello();
+        //------Example #1----------------
+    // Регистрируем IProcessor с классом AMD, т.о. каждый раз запрашивая Iprocessor получаем объект AMD.
+    injector.RegisterInstance<IProcessor, IntelProcessor>();
+    injector.GetObject<IProcessor>()->SetterProcessor("Intel",x64,2.1);
+    Computer computerIntel(injector.GetObject<IProcessor>().get());
+    cout<<computerIntel.GetProcessor()<<endl;
 
     //------Example #2----------------
+    // Регистрируем IProcessor с классом Intel, т.о. каждый раз запрашивая Iprocessor получаем объект Inte;.
+    injector.RegisterInstance<IProcessor, AMDProcessor>();
+    injector.GetObject<IProcessor>()->SetterProcessor("AMD",x86,4.2);
+    Computer computerAMD(injector.GetObject<IProcessor>().get());
+    cout<<computerAMD.GetProcessor()<<endl;
 
-    gContainer.RegisterInstance<IAmAThing, TheThing>();
-    gContainer.RegisterFactory<IAmTheOtherThing, TheOtherThing, IAmAThing>();
+        return 0;
 
-    gContainer.GetObject<IAmAThing>()->TestThis();
-    gContainer.GetObject<IAmTheOtherThing>()->TheOtherTest();
-
-    //Опять запршиваем объект,после последней регистрации получим объект Privet
-    helloInstance = injector.GetObject<IHello>();
-    helloInstance->hello();
-    return 0;
 }

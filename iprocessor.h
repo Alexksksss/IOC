@@ -3,6 +3,7 @@
 
 #include <iostream>
 using namespace std;
+
 enum ProcessorType
 {
     x86 = 86,
@@ -11,45 +12,44 @@ enum ProcessorType
 
 class IProcessor
 {
+     string Version;
+     ProcessorType Type;
+     double Speed;
 public:
-    IProcessor(){}
+     IProcessor(){}
 
-    void SetterProcessor(string version, ProcessorType type, double speed)
-    {
-        Version = version;
-        Type = type;
-        Speed = speed;
-    }
-    void GetterProcessor()
-    {
-        cout << "Processor for "<<Version<<". It`s speed = "<<Speed<<"; Type = Type"<<endl;
-    }
-    virtual ~IProcessor(){}
 
-private://protected?
-    string Version;
-    ProcessorType Type;
-    double Speed;
+     string GetterProcessor()
+     {
+         string speed = to_string(Speed);
+         string type = to_string(Type);
+         return  "Processor for " + Version + ". It`s speed = " + speed + "; Type = " + type;
+     }
+
+     void SetterProcessor(string version, ProcessorType type, double speed)
+     {
+         Version = version;
+         Type = type;
+         Speed = speed;
+     }
+
+     virtual ~IProcessor(){}
+
+ };
+class IntelProcessor:public IProcessor
+{
+public:
+    IntelProcessor(){}
+    ~IntelProcessor(){}
+};
+
+class AMDProcessor:public IProcessor
+{
+public:
+    AMDProcessor(){}
+    ~AMDProcessor(){}
 };
 
 
-
-
-
-
-//class IntelProcessor
-//{
-
-//public:
-//    IntelProcessor(????){????}
-
-
-
-//    string GetProcessorInfo()
-//    {
-//        return "Processor for" + Version + Speed + Type;
-//    }
-
-//};
 
 #endif // IPROCESSOR_H

@@ -1,6 +1,6 @@
 #include "iprocessor.h"
 
-IProcessor::IProcessor()
-{
+//IProcessor::IProcessor()
+//{
 
-}
+//}
